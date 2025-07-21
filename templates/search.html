@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">    
+
+</head>
+<body>
+    <div class="head"><h1>{{user.firm}}</h1>
+        <div class="topnav">
+            <a href="{{url_for('index')}}">Home</a>
+            <a href="{{url_for('student')}}">New student</a>
+            
+            <a href="/studypoint/">studypoint</a>
+            <a href="{{url_for('report')}}">Report</a>
+            <a href="{{url_for('search')}}"><i class="bi bi-search"></i></a>
+          </div>
+    <!-- <div class="billform"> -->
+    <form class="billform" method="post" action="{{ url_for('search') }}">
+        
+        
+        
+        <label for="query">Search by</label>
+        <input id ="query"  name="query" type="text" placeholder="Name/Aadhar/Mobile">
+        <button type="submit" class="submit-btn">Search</button>
+    
+    </form>
+<!-- </div> -->
+</div>
+        
+        
+        
+            <table>
+                <thead>
+                    <tr>
+                        <th>Sr No</th>
+                        <th>Name</th>
+                        <th>Mobile</th>
+                        <th>Aadhar</th>
+                        <th>Admission Date</th>
+                    </tr> 
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                <tr><td>1)</td> <td><a href="/updatestudent/{{student.aadhar}}">{{student.name}}</a></td><td> {{student.mobile}} </td><td><a href="/paymenthistory/{{student.aadhar}}">{{student.aadhar}}</a></td> <td> {{student.firstdate}}</td></tr>
+                {% endfor %} 
+            </tbody>
+            </table>
+        
+</body>
+</html>

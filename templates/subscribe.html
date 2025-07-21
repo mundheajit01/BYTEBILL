@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/static/ic_launcher.ico">    
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">    
+
+    <title>SUBSCRIBE</title>
+
+</head>
+<body>
+  <div class="head"><a href="{{url_for('index')}}" style="color: rgb(227, 242, 27) ; text-decoration: none";><h1>{{user.firm}}</h1></a><p></p><h3></h3>
+    <form method="post" action="{{ url_for('subscribe') }}">
+        <label for="code">CODE :</label>
+        <input type="text" id="code" name="code" style="min-width: 70%;">
+        <button type="submit" class="submit-btn" style="max-width: 100px;margin-left: 40%;">Submit</button>
+      </form>
+    <p>Renew Your plan to continue the service</p><br>
+    <p>Contact: 9834888609</p>
+    </div>
+    {% if mac %}
+    <h4>Your id is: {{mac}}</h4>
+    <h4>Your key is: {{key}}</h4>
+    {% endif %}
+</body>
+</html>

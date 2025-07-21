@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/static/ic_launcher.ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">    
+
+
+</head>
+<body>
+   
+    <div class="head"><h1>BYTEBILL</h1>
+    <form class="billform" method="post" action="{{ url_for('new') }}">
+        <label for="firm">firm name:</label>
+        <input type="text" id="firm" name="firm" required><br>
+        <label for="mobile">Mobile number:</label>
+        <input type="mobile" id="mobile" name="mobile" minlength="10" maxlength="10" required><br>
+        <label for="email">email:</label>
+        <input type="email" id="email" name="email" required><br>
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" title="seperate two lines by ';' in address " placeholder="add mobile number in address" required><br>
+        <label for="right">Bill Right corner</label>
+        <input type="text" id="right" name="right"><br>
+        <label for="left">Bill left Corner</label>
+        <input type="text" id="left" name="left" ><br>
+        <label for="warning">Bill warning</label>
+        <input type="text" id="warning" name="warning" placeholder="add ';' seperated lines" ><br>
+        <label for="username">Username</label>
+        <input type="text" name="username" placeholder="Username">
+        <label for="password">Password</label>
+        <input type="password" name="password" placeholder="password">
+
+
+        <label for="key" >Unique key:</label>
+        <input type="text" id="key" name="key" value={{key}} minlength="10" maxlength="10" required><br>
+        <button type="submit" class="submit-btn" >Register</button>
+      </form>
+    </div>
+</body>
+</html>

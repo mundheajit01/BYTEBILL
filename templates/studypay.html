@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">    
+
+<body>
+    <div class="head"><h1>{{user.firm}}</h1>
+        <div class="topnav">
+            <a href="{{url_for('index')}}">Home</a>
+            <a href="{{url_for('student')}}">New student</a>
+            <a href="/studypoint/">studypoint</a>
+            <a href="{{url_for('report')}}">Report</a>
+            <a href="{{url_for('search')}}"><i class="bi bi-search"></i></a>
+          </div>
+
+          <p>Payment Page for Study Point</p>
+          <form class="billform" method="post" action="/studypay/{{aadhar}}/{{name}}/{{seat}}">
+              <label>Seat: {{seat}}</label><br>
+              <label>{{name}}</label><br>
+              <label for="amount">amount:</label>
+              <input type="hidden" id="name" name="name" value="{{name}}">
+              <input type="number" id="amount" name="amount" value="{{fee}}" required><p></p><br>
+              <label for="aadhar" >Aadhar</label>
+              <input type="number" pattern="[0-9]{12}" id="aadhar" name="aadhar" value="{{aadhar}}" minlength="12" maxlength="12" required><p></p><br>
+             
+              <label for="payment">Payment Method</label>
+              <select name="payment" id="payment" required>
+                  <option value="UPI">UPI</option>
+                  <option value="Cash">Cash</option>
+                  <option value="zero">Zero</option>
+              </select><br><p></p><br>
+              <!-- {% if user.users %}
+              <label for="user">User:</label>
+              <select name="user" id="user">
+                  {% for i in user.users %}
+                  <option value="{{i}}">{{i}}</option>
+                  {% endfor %}
+              </select><p></p><br>
+              {% endif %} -->
+              <button type="submit" class="submit-btn" >submit</button>
+            </form>
+        
+        </div>
+    
+    
+</body>
+</html>

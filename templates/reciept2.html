@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt</title>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+    
+        /* Container Styling */
+        .container {
+            width: 100%;
+            max-width: 100%; /* Ensure container width doesn't exceed 100% */
+            background-color: white;
+            padding: 2%;
+            border-radius: 2%; /* Rounded corners for container */
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            border: 5px solid orangered; /* Border color */
+            box-sizing: border-box; /* Include padding and border in total width */
+        }
+    
+        /* Header Styling */
+        .header {
+            text-align: center;
+            color: #ff4500; /* Orangered */
+        }
+    
+        .header h1 {
+            margin: 0;
+            font-size: 26px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+    
+        .header p {
+            margin: 0.5% 0;
+            font-size: 12px;
+            color: navy;
+        }
+    
+        /* Top Bar Styling */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2%;
+        }
+    
+        .top-bar div {
+            font-size: 12px;
+            font-weight: bold;
+        }
+    
+        .top-bar .left {
+            color: green;
+        }
+    
+        .top-bar .right {
+            color: navy;
+            margin-right: 3%;
+        }
+    
+        /* Info Section Styling */
+        .info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3%;
+            border-bottom: 2px solid #2E3192;
+            padding-bottom: 1%;
+        }
+    
+        .info div {
+            font-size: 14px;
+            color: #000;
+        }
+    
+        /* Content Section Styling */
+        .content {
+            margin-top: 2%;
+        }
+    
+        .content p {
+            font-size: 16px;
+            margin: 1% 0;
+        }
+    
+        .content p span {
+            font-weight: bold;
+            color: #2E3192; /* Dark Blue */
+        }
+    
+        /* Footer Styling */
+        .footer {
+            margin-top: 30px;
+            font-size: 12px;
+            color: #666;
+        }
+    
+        .footer p {
+            font-style: italic;
+        }
+    
+        /* Last Container Section */
+        .containerlast {
+            display: flex;
+            justify-content: space-between;
+            margin-right: 1%;
+        }
+    
+        /* Fixed Width Table */
+        .fixed-width {
+            width: 98%; /* Fixed width for the table */
+            border-collapse: collapse;
+            margin-right: 2%; /* Add gap on the right side */
+            
+        }
+        @media screen and (max-width: 600px) {
+    .fixed-width {
+        width: 100%;
+        max-width: 100%;
+        padding: 0; /* Remove extra padding for small screens */
+        overflow-x: auto; /* Ensure scrolling is possible */
+    }
+}
+
+    
+        .fixed-width th, .fixed-width td {
+            border: 1px solid black;
+            padding: 5px;
+            text-align: left;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+    
+        .fixed-width th {
+            background-color: #f4f4f4; /* Light grey background for headers */
+        }
+    
+        /* Page Styling for PDF */
+        @page {
+            margin: 3mm; /* Set margin for the PDF */
+            font-size: 80%;
+
+        }
+    </style>
+    
+</head>
+<body>
+<div class="container">
+    
+    <!-- Top Bar Section -->
+    <div class="top-bar">
+        <div class="left">{{user.billleft}}<br>
+        </div>
+        <div class="right">{{user.billright}}</div>
+    </div>
+
+    <!-- Header Section -->
+    <div class="header">
+       <a href="{{url_for('index')}}" style="color: orangered;"> <h1>{{user.firm}}</h1></a>
+       {% for i in user.address %}
+        <p>{{i}}</p>
+        {% endfor %}
+    </div>
+
+    <!-- Info Section -->
+    <div class="info">
+        <div>
+            <p>Date: <span>{{payment.date}}</span></p>
+        </div>
+        <div>
+            <p>Receipt No.: <span>{{payment.srno}}</span></p>
+        </div>
+    </div>
+
+    <!-- Content Section -->
+    <div class="containerlast">
+        <div class="column">
+            <p>Name: <span style="font-weight: bold;
+                color: #2E3192;">{{student.name}}</span></p>
+        </div>
+        <div class="column">
+            <p>Student Aadhar: <span style="font-weight: bold;
+                color: #2E3192;">{{student.aadhar}}</span></p>
+        </div>
+    </div>
+    
+    <table class="fixed-width" cellspacing="0" cellpadding="8">
+        <thead>
+            <tr>
+                <th>Course</th>
+                <th>FEE</th>
+                <th>Admission Date</th>
+                {% if allpayments %}
+                {% for i in allpayments%}
+                {% if payment.date >= i.date %}
+                {% if payment.srno >= i.srno %}
+                {% if payment.course == i.course %}
+                {% if i.study != 1 %}
+                <th>{{i.date}}</th>
+                {% endif %}
+                {% endif %}
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+                
+                {% endif %}
+                <th>Total Recieved</th>
+                <th>Balance</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{% if point %}
+                    {{point[0]}}({{point[2]}})
+                    {% else %}
+                    <!-- {% for course in student.courses %}
+                        {{ course }} 
+                        {% for fee in courses %}
+                            {% if course == fee.course %}
+                                ({{ fee.fee }})
+                            {% endif %}
+                        {% endfor %} 
+                        <br> 
+                    {% endfor %} -->
+                    {{payment.course}}
+                    {% endif %}
+                </td>
+                
+                <td>{% if point %}
+                    {{point[1]}}
+                    {% else %}
+                    {% for j in student.courses %}
+                    {% if payment.course == j %}
+                    {{ student.courses[j] }}
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                    </td>
+                    <td>
+                        {% if point %}
+                        {{student.firstdate}}
+                        {% else %}
+                        {{student.date}}
+                        {% endif %}</td>
+                
+                {% if allpayments %}
+                {% for i in allpayments%}
+                {% if payment.date >= i.date %}
+                {% if payment.srno >= i.srno %}
+                {% if i.study != 1 %}
+                {% if i.course == payment.course %}
+                <td>{{i.amount}}({{i.payment}})</td>
+                {% endif %}
+                {% endif %}
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+                {% endif %}
+                
+                <td>{% if point %}
+                    {{payment.amount}}
+                    {% else %}
+                    {{paid}}
+                    {% endif %}
+                    </td>
+                <td>{% if point %}
+                    0
+                    {% else %}
+                    {{due}}
+                    {% endif %}
+                    </td>
+            </tr>
+        </tbody>
+    </table>
+    
+
+    <!-- Footer Section -->
+    <div class="footer">
+        <p><ul>
+            {% for j in user.billwarning %}
+            <li>{{j}}</li>
+            {% endfor %}
+        </ul>
+        </p>
+    </div>
+    <p style="text-align: right; font-size: 20;">{% if payment.user %}{{payment.user}}{% else %}Signature{% endif %}</p>
+
+</div>
+{% if e %}
+    <!-- Render something if 'e' is present -->
+    <script>
+        alert({{ e | tojson }})
+    </script>
+    
+
+    <!-- Render something else if 'e' is not present -->
+{% endif %}
+
+</body>
+</html>

@@ -1,0 +1,297 @@
+.left{text-align: left;}
+.right {
+  /* position: fixed; fixed ensures it stays relative to viewport */
+  bottom: 1rem;    /* distance from bottom */
+  right: 1rem;     /* distance from right */
+  text-align: right;
+}
+
+        .head{min-height: 120%;
+            display: flex; /* Enable flexbox layout */
+            flex-direction: column; /* Stack divs vertically */
+            justify-content: center; /* Center vertically within the container */
+            align-items: center; 
+            gap: 15%;
+            column-gap: 15%;
+            
+            
+        /* background-color: orangered; */
+      }
+      .flexright{
+        display: flex;
+    justify-content: flex-end; /* push children to the right */
+    align-items: flex-start;   /* push children to the top */
+    right: 0%;
+      }
+        /* Global styles */
+        .warn{
+          color: red;
+          position: absolute;
+          right: 0;
+          /* transform: translateY(-50%);
+          max-width: 50%; */
+          top: 90%;
+          
+        }
+        .topr {
+          position: absolute;
+          top: 150px;
+          left: 60%;;
+        }
+        
+        .center{
+          align-items: center;
+          text-align: center;
+          border-radius: 10px; 
+          display: inline-block;
+          background-color: rgb(255, 141, 100);
+          /* display: flex;  */
+          align-items: center;
+          margin-top: 5%;
+          width: auto;
+          min-width: 100px;
+          height: auto;
+          border: 2px solid brown; 
+          padding: 5px;
+
+        }
+        .settings {
+          display: flex;
+          flex-direction: row;
+          padding: 5px;
+          gap: 5px;
+          margin-left: 80%; /* pushes the item to the right */
+      }
+      
+      
+        h1{
+            color: #ff4d00;
+            text-align: center;
+            font-size: 55px;
+            font-weight: bold;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        body {
+            top: 0;
+            font-family: Arial, sans-serif;
+            background-color: rgb(255, 231, 199);
+            /* display: flex; Use flexbox for layout */
+            flex-direction: column;
+            overflow-y: auto;
+
+          }
+          
+          /* Styles for h2 tag */
+          p{
+            color: #4d4d4d;
+            font-size: 24px;
+            font-weight: bold;
+          }
+          
+          /* Styles for img tag */
+          img {
+            max-width: 100%;
+            height: auto;
+            margin: 20px 0;
+          }
+          
+          a{
+            color: brown;
+
+          }
+          /* Add a black background color to the top navigation */
+.topnav {
+  background-color: orangered;
+  overflow: hidden;
+  border-radius: 10px; 
+  display: inline-block;
+  margin-left: center; 
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: brown;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: red;
+  color: white;
+}
+.courses{
+  flex-direction: row; 
+  width: 100%;
+  display: flex; /* Ensure flexbox is enabled */ 
+  justify-content: center; /* Center items horizontally */
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+
+}
+.billform{
+  background-color: #B0E0E6 ;
+  /* rgb(101, 202, 245); */
+  padding: 4px;
+  row-gap: 10px;
+  column-gap: 10px;
+  border-radius: 10px;
+  width:30%;
+  min-width: 350px;
+}
+
+.form-container {
+  background-color: #fff;
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 100%;
+}
+
+/* Form title */
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+.billform label {
+  display: inline-block;
+  width: 40%; /* Adjust the width as needed */
+  margin-right: 10px;
+  font-weight: bold;
+  color: #555;
+  text-align: left; /* Align labels to the right */
+}
+/* Labels and inputs */
+/* label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #555;
+} */
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+input[type="date"],
+input[type="password"],
+input[type='mobile'],
+input[type='checkbox'] {
+  width: 55%;
+  padding: 8px 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+/* Checkboxes */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.checkbox-container input {
+  margin-right: 10px;
+}
+
+/* Submit button */
+.submit-btn {
+  width: 100%;
+  padding: 10px 15px;
+  background-color: brown;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: rgb(43, 3, 3);
+}
+   
+.logoutbtn{
+  padding: 10px 15px;
+  background-color: red;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+/* style fro tables */
+
+/* General table styling */
+table {
+  width: 80%; /* Makes the table span the container width */
+  border-collapse: collapse; /* Replaces `cellspacing=0` */
+  margin: 20px auto; /* Adds spacing around the table */
+  background-color: #e4d2b6;
+}
+
+/* Table border styling */
+table, th, td {
+  border: 1px solid brown; /* Adds a border to the table, header, and cells */
+}
+
+/* Padding inside table cells (equivalent to `cellpadding=8`) */
+th, td {
+  padding: 8px;
+  text-align: left; /* Aligns content to the left */
+}
+
+/* Header row styling */
+th {
+  background-color: #f2f2f2; /* Light gray background for headers */
+  font-weight: bold;
+}
+
+/* Alternating row colors for better readability */
+tr:nth-child(even) {
+  background-color: #f9f9f9; /* Light gray for even rows */
+}
+
+tr:hover {
+  background-color: #f3ccab; /* Highlight row on hover */
+}
+
+
+
+/* student page */
+
+.student-info, .course-payment-history, .fees-summary, .payment-history,.todays-collection, .coursewise-collection, .userwise-collection {
+  background: #e4d2b6;
+  border: 1px solid #ddd;
+  border-radius: 80px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  min-height: 300px;
+
+}
+
+.student-info h2 {
+  margin-bottom: 5px;
+}
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Adds spacing between the divs */
+  justify-content: center;
+  align-items: flex-start;
+}

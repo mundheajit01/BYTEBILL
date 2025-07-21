@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/static/ic_launcher.ico">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <style></style>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">    
+    <title>email settings</title>
+    
+
+</head>
+<body>
+  <div class="head"><h1>{{firm.firm}}</h1>
+    <form class="billform" method="post" action="/updateemail/">
+      <h3>Email Preferences</h3>
+      <!-- Daily Email Settings -->
+      <label for="dailyEmailToggle">Daily Email Reports</label>
+      <input type="checkbox" id="dailyEmailToggle" name="daily_email_enabled" {{ 'checked' if entry and entry.daily_email_enabled else '' }} onclick="toggleInput('dailyEmailTime', this)">
+      <div id="dailyEmailTime" style="display: none;">
+          <label for="dailyEmailTimeInput">Daily Email Time</label>
+          <input type="time" id="dailyEmailTimeInput" name="daily_email_time" value="{{entry.daily_email_time  }}">
+      </div>
+  
+      <!-- Monthly Email Settings -->
+      <label for="monthlyEmailToggle">Monthly Email Reports</label>
+      <input type="checkbox" id="monthlyEmailToggle" name="monthly_email_enabled" {{ 'checked' if entry and entry.monthly_email_enabled else '' }} onclick="toggleInput('monthlyEmailDate', this)">
+      <div id="monthlyEmailDate" style="display: none;">
+          <label for="monthlyEmailDateInput">Day of the Month</label>
+          <input type="number" id="monthlyEmailDateInput" name="monthly_email_day" min="1" max="31" value="{{entry.monthly_email_day if entry else none}}" placeholder="e.g., 15">
+      </div>
+  
+      <!-- Yearly Email Settings
+      <label for="yearlyEmailToggle">Yearly Email Reports</label>
+      <input type="checkbox" id="yearlyEmailToggle" name="yearly_email_enabled" onclick="toggleInput('yearlyEmailDate', this)">
+      <div id="yearlyEmailDate" style="display: none;">
+          <label for="yearlyEmailDateInput">Date of the Year</label>
+          <input type="date" id="yearlyEmailDateInput" name="yearly_email_date">
+      </div>
+   -->
+   <label for="yearlyEmailToggle">Yearly Email Reports</label>
+    <input type="checkbox" id="yearlyEmailToggle" name="yearly_email_enabled" {{ 'checked' if entry and entry.yearly_email_enabled else '' }} onclick="toggleInput('yearlyEmailDate', this)">
+    <div id="yearlyEmailDate" style="display: none;">
+        <label for="yearlyEmailDayInput">Day</label>
+        <input type="number" id="yearlyEmailDayInput" name="yearly_email_day" value="{{entry.yearly_email_day if entry else none}}" min="1" max="31" placeholder="Day (e.g., 25)">
+        <label for="yearlyEmailMonthInput">Month</label>
+        <input type="number" id="yearlyEmailMonthInput" name="yearly_email_month" value="{{entry.yearly_email_month if entry else none}}" min="1" max="12" placeholder="Month (e.g., 12)">
+    </div>
+      <!-- student reciept email -->
+      <label for="studentemail">Student email reciept</label>
+      <input type="checkbox" id="studentemail" name="studentemail" {{ 'checked' if entry and entry.studentemail else '' }}>
+      <!-- Submit Button -->
+      <button class="submit-btn" type="submit">Submit</button>
+  </form>
+  <a href="{{url_for('index')}}"><button class="submit-btn">Cancel</button></a>
+  
+  </div>
+  <script>
+    // Function to toggle visibility of additional input fields
+    function toggleInput(divId, checkbox) {
+        const div = document.getElementById(divId);
+        div.style.display = checkbox.checked ? "block" : "none";
+    }
+</script>
+
+  <script>{{a}}('error :{{b}}')</script>
+</body>

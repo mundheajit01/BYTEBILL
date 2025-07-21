@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>studypoint</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">    
+
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+</head>
+<body>
+  <div class="head"><h1>{{user.firm}}</h1>
+    {% if varss == 0 %}
+      <div class="topnav">
+        <a href="{{url_for('index')}}">Home</a>
+        <a href="{{url_for('student')}}">New student</a>
+        <a href="/studypoint/">studypoint</a>
+        <a href="{{url_for('report')}}">Report</a>
+        <a href="{{url_for('search')}}"><i class="bi bi-search"></i></a>
+      </div>
+      {% endif %}
+      {% if setdetails %}
+      <form class="billform" method="post" action="{{ url_for('studypoint') }}">
+        <label for="seats">seats availabe:</label>
+        <input type="text" id="seats" name="seats" required><br>
+        <label for="fees">Fees:</label>
+        <input type="number" id="fees" name="fees" title="fees per head" required><br>
+        <button type="submit" class="submit-btn">Submit</button>
+      </form></div>
+      {% endif %}
+      {% if study %}
+      <label>All Seats:<a href="/updatestudy">{{study.seats}}</a></label>
+      <p>Available seats : {{available}}</p>
+      
+
+      <table>
+        <thead>
+            <tr>
+                <th>Sr No</th>
+                <th>Aadhar</th>
+                <th>Name</th>
+                <th>Mobile</th>
+                <th>Seat Allotted</th>
+                <th>Admission Date</th>
+                <th>Days Left</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+          {% set ns = namespace(sr=0) %}
+      {% for a,e in nearexpiry.items() %}
+      {% for i in students %}
+        {% if a == i.aadhar%}
+            <tr>
+              {% set ns.sr = ns.sr + 1 %}
+              <td>{{ ns.sr }}</td>
+              
+              <td><a href="/update/studypoint/student/{{i.aadhar}}">{{ i.aadhar }}</a></td>
+              <td><a href="/paymenthistory/study/{{i.aadhar}}">{{ i.name }}</a></td>
+              <td>{{ i.mobile }}</td>
+        <td>{% for j in studypoint %}{% if i.aadhar == j.aadhar %} {{j.seatalloted}} </td>
+        <td>{{i.firstdate}}</td>
+        <td><a href="/studypay/{{i.aadhar}}/{{i.name}}/{{j.seatalloted}}">{{e}}</a></td>
+        <td>{% if admin=='1' %}<a href="/deletestudy/{{i.aadhar}}/{{j.seatalloted}}"><i class="bi bi-trash" style="color: red;"></i></a>{% else %}<i class="bi bi-trash" style="color: black;"></i></i> {% endif %}</td>
+        {% endif %} 
+        {% endfor %}  
+        
+      </tr>
+      
+
+      {% endif %}
+      {% endfor %}
+      {% endfor %}
+      {% endif %}
+    </tbody>
+  </table>
+      
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment History</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+
+</head>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">    
+
+
+<body>
+    <div class="head"><h1>{{user.firm}}</h1>
+        <div class="topnav">
+            <a href="{{url_for('index')}}">Home</a>
+            <a href="{{url_for('student')}}">New student</a>
+            
+            <a href="/studypoint/">studypoint</a>
+            <a href="{{url_for('report')}}">Report</a>
+            <a href="{{url_for('search')}}"><i class="bi bi-search"></i></a>
+          </div>
+          <form class="billform" method="post" action="{{ url_for('newbill') }}">
+            <label for="amount">amount:</label>
+            <input type="number" id="amount" name="amount" required><br>
+            <label for="mobile">Mobile:</label>
+            <input type="text" pattern="[0-9]{10}" id="mobile" name="mobile" minlength="10" maxlength="10" required><br>        
+            <input type="hidden" id="aadhar" name="aadhar" value="{{student.aadhar}}"  minlength="12" maxlength="12" required>
+            <label for="course">Course</label>
+            <select name="course" id="course" required>
+                {% for i in student.courses %}
+                <option value="{{i}}">{{i}}</option>
+                {% endfor %}
+            </select><br><br>
+            <label for="payment">Payment Method</label>
+            <select name="payment" id="payment" required>
+                <option value="UPI">UPI</option>
+                <option value="Cash">Cash</option>
+                <option value="zero">Zero</option>
+            </select><br><br>
+            {% if user.users %}
+            <label for="user">User:</label>
+            <select name="user" id="user">
+                <option></option>
+                {% for i in user.users %}
+                <option value="{{i}}">{{i}}</option>
+                {% endfor %}
+            </select><br>
+            {% endif %}
+            <button  type="submit" class="submit-btn">submit</button>
+          </form>  
+    </div>
+    <div class="container">
+        <!-- Student Info Section -->
+        <div class="student-info">
+            <h2>{{ student.name }}</h2>
+            <table>
+                <tr>
+                    <th>Mobile Number:</th>
+                    <td>{{ student.mobile }}</td>
+                </tr>
+                <tr>
+                    <th>Email:</th>
+                    <td>{{ student.email }}</td>
+                </tr>
+                
+                <tr>
+                    <th>Aadhar:</th>
+                    <td>{{ student.aadhar }}</td>
+                </tr>
+                <tr>
+                    <th>Registration Date:</th>
+                    <td>{{ student.date }}</td>
+                </tr>
+                <tr>
+                    <th>Courses registered:</th>
+                    <td>{{ student.courses }}</td>
+                </tr>
+                
+                
+            </table>
+        </div>
+    
+        <!-- Course Payment History Section -->
+        <div class="course-payment-history">
+            <h3>Course Wise Payment History</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Course</th>
+                        <th>Amount Paid</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in dic %}
+                    <tr>
+                        <td>{{ i }}</td>
+                        <td>{{ dic[i] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    
+        <!-- Fees Summary Section -->
+        <div class="fees-summary">
+            <h3>Fees Summary</h3>
+            <table>
+                <tr>
+                    <th>Total Fees:</th>
+                    <td>{{ student.totalfees }}</td>
+                </tr>
+                <tr>
+                    <th>Amount Paid:</th>
+                    <td>{{ paid }}</td>
+                </tr>
+                <tr>
+                    <th style="color: red;">Amount Due:</th>
+                    <td style="color: red;">{{ due }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="container">
+        <!-- Payment History Section -->
+        <div class="payment-history">
+            <h3>Payment History</h3>
+            {% if payment %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Payment Mode</th>
+                        <th>Course</th>
+                        <th>Authorized By</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in payment %}
+                    {% if not i.study %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ i.date }}</td>
+                        <td>
+                            <a href="/generatebill/{{ i.srno }}/{{ student.aadhar }}/">
+                                {{ i.amount }}
+                            </a>
+                        </td>
+                        <td>{{ i.payment }}</td>
+                        <td>{{ i.course }}</td>
+                        <td>{% if i.user %}{{ i.user }}{% else %}-{% endif %}</td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p>No payment history</p>
+            {% endif %}
+        </div>
+    </div>
+    
+
+
+
+
+
+
+    
+</body>
+</html>
